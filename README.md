@@ -53,11 +53,13 @@ stringValue = 100
 
 ##### 4. 기본타입
 
-> 최근 함수형 프로그래밍 언어는 타입이 간소화되는 추세이다.    
+> 최근 함수형 프로그래밍 언어는 타입이 유연화되는 추세이다.    
 
 - 숫자형: Int, Uint, Double, Float    
 - boolean 형 : Bool
-- 문자형 : String, Charater(char형) 
+- 문자형 : String, Charater(char형)
+- 모든 데이터형 : Any
+- 널(nil)을 허용하는 형:  Optional 
 
 ##### 5. 타입정의
 
@@ -360,3 +362,49 @@ for _ in 0..<4{
 }
 
 ~~~
+
+##### 12. 특수한 데이터형과 캐스팅      
+
+>    swift에서는 다음과 같은 특수한 데이터형과 변환(채크) 연산자를 사용한다.  
+
+- Any형은 어떤 값을 대입해도 문제가 없다
+- Optional 형은 데이터형?으로 선언한다
+- ?? 연산자는 Optional 변수가 nil 일 경우, 대체할 기본값을 지정한다 
+- 객체의 형변환은 as를 사용한다. 다운캐스팅이면 as?를 사용해야 한다.     
+- 튜플타입은 복잡한 데이터 모임이 한 개의 데이터처럼 사용된다. (데이터형,...)로 선언하고 (값, 값, ...)으로 대입한다. 
+
+~~~swift
+// any형
+var ay : Any = 3
+ay = "300"
+ay = true
+
+// optional형
+var opt : Int?
+opt = nil
+print (type(of : opt))
+var n = opt ?? 0
+print ("\(n)")
+
+// any 형을 자식형으로 변환(다운캐스팅)
+let ay2       = 111 as Any
+let intVal    = ay2 as? Int       
+let stringVal = ay2 as? String    
+
+// 상속받은 자식형을 any형으로 변환
+var ay3 : Any = ""
+ay3 = intVal as Any
+ay3 = stringVal as Any
+
+// type check
+if(ay3 is Any){
+    print ("any")
+}
+
+// tuple
+var tpl: (Int, String)
+t = (100, "math")
+
+~~~
+
+
