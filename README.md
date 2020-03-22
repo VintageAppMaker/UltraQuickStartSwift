@@ -265,6 +265,7 @@ for i in (0 ... 3){
 >    func로 함수를 정의한다. 다른 언어에 비해 많은 차이점을 가지고 있다.
 
 - 함수정의는 func 함수명 -> 리턴값 { }
+- 리턴값이 없으면 Void로 표기하거나 리턴값을 표기하지 않음
 - 기본적으로 파라메터의 이름을 반드시 써줘야 한다 
 - 파라메터이름을 표기하고 싶지않다면,  _를 표기하고 빈 칸 후, 변수를 정의한다  
 - 가변 파라메터의 정의는 [데이터형...] 이다 
@@ -306,5 +307,56 @@ func test4(num : Int ){
 }
 
 test4(num : 100)
+
+~~~
+
+##### 11. 클로져(closure)    
+
+>    클로져를 직감적으로 설명하자면, 이름없는 함수덩어리를 정의하는 것이다.  이를 "실행가능한 코드덩어리"라는 표현하기도 한다. 그러다보니 함수로 정의하기에는 코드가 짧고 함수의 파라메터로 함수를 넘겨야 할 떄  사용한다. 
+
+- 클로져의 구조는 { (매개변수 목록) **->** 반환타입 **in**    실행 코드 }
+- 함수형 변수 타입정의는 (파라메터타입) -> 리턴되는타입 
+- 클로져 코드를 사용할 경우,  파라메터 이름을 표기할 수 없다
+- 클로져가 파라메터로 넘겨지고, 그 함수의 결과값도 클로져일 경우.  만약  넘겨진 파라메터 클로져가 그 안에 실행된다면  "Escaping Closure:  전역변수 룰이 적용" 이다.  그 때에는 반드시  @escaping (데이터형)->데이터형으로 선언되어야 한다
+- 함수 안으로 넘겨진 클로져가 **함수 밖**에 저장되고 관리된다면, Escaping Closure로 선언해야 한다.      
+
+~~~swift
+// 함수형 변수에 클로져를 대입 
+let fn : (String) -> Void = { ( msg : String ) in print (msg) }
+fn("AAAA") 
+
+// 함수의 리턴값으로 클로져를 리턴  
+func makeCounter(nStep : Int) -> ( ()->Int ){
+    var sum = 0
+    return{    
+        sum = sum + nStep  
+        return sum
+    }
+}
+
+let c0 = makeCounter(nStep : 2)
+for _ in 0..<4{
+    print ( c0() )
+}
+
+
+// 함수의 파라메터로 클로져를 받고 
+// 리턴되는 클로져(함수밖에서 관리)에서 
+// 파라메터 클로져를 실행할 경우
+// @escaping (데이터형)->데이터형 으로 반드시 
+// 선언해주어야 한다.
+func makeCounterByEscaping(nStep : Int,  fn : @escaping (Int)->Int ) -> ( ()->Int ){
+    var sum = 0
+    return{    
+        sum  = fn(sum)  
+        return sum
+    }
+}
+
+let c1 = makeCounterByEscaping(nStep: 5, fn: { (sum : Int) in return sum + 5  }) 
+
+for _ in 0..<4{
+    print ( c1() )
+}
 
 ~~~
