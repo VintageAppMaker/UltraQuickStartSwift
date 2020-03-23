@@ -4,7 +4,7 @@
 
 1. 최소한의 필수 swift 문법
 2. 현업에서 사용하는 필수 코딩스타일 위주정리 
-   
+  
 ##### 1. 메인함수 
 > (1)메인함수 정의없이 바로 코드가 실행된다.  (2) import 문은 외부라이브러리에나 사용한다. 즉, 같은 프로젝트의 파일에 대해서 사용할 필요가 없다. (3) iOS에서는 @UIApplicationMain로 메인함수를 정의가능하다.
 
@@ -406,6 +406,79 @@ if(ay3 is Any){
 // tuple
 var tpl: (Int, String)
 t = (100, "math")
+
+~~~
+
+##### 13. 클래스     
+
+>    swift에서는 객체지향 기본적인 기능을 지원한다. 프로토콜 언어를 지향하기 때문에 abstract와 interface는 지원하지 않는다.  
+
+- 일반 : class 클래스명 {}
+- 생성자: init()
+- 상속 : class 클래스명 : 상속받을클래스명{}
+- 오버라이드 : override 지시어를 사용 
+- compute 속성: var 속성 : 유형 { get{} set{} }      
+
+~~~swift
+// 기본클래스 
+class A{
+    var name : String? 
+    func test (){
+        print ("test")
+    }
+}
+
+A().test()
+
+// 생성자 
+class B{
+    var name : String 
+    func test (){
+        print ("\(name)")
+    }
+    
+    init(name : String ){
+        self.name = name
+    }
+}
+B( name : "Linkin Park").test()
+
+// 상속 
+class C: B{
+}
+C( name : "korn").test()
+
+// 오버라이드  
+class D: B{
+    override func test (){
+        print ("overrided")
+    }
+}
+D(name : "initial D").test()
+
+// compute 속성  
+class E: B{
+    var _age : Int = 0   
+    var age : Int {
+        get {
+            return _age
+        }
+        
+        // (파라메터)를 사용하지 않으면 
+        // newValue로 넘겨짐 
+        set(n){
+            if n > 50 {
+                _age = 49
+            } else {
+                _age = n
+            }
+        }
+    }
+}
+var e = E(name : "compute properies")
+e.age = 60
+print ("\(e.age)")
+
 
 ~~~
 
