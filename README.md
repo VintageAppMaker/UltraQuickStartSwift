@@ -4,7 +4,7 @@
 
 1. 최소한의 필수 swift 문법
 2. 현업에서 사용하는 필수 코딩스타일 위주정리 
-  
+
 ##### 1. 메인함수 
 > (1)메인함수 정의없이 바로 코드가 실행된다.  (2) import 문은 외부라이브러리에나 사용한다. 즉, 같은 프로젝트의 파일에 대해서 사용할 필요가 없다. (3) iOS에서는 @UIApplicationMain로 메인함수를 정의가능하다.
 
@@ -482,4 +482,91 @@ print ("\(e.age)")
 
 ~~~
 
+##### 14. 프로토콜(protocol)     
+
+>    swift는 프로토콜 지향언어이다. 프로토콜에 대한 복잡한 개념들이 난무하지만, 일반 개발자 입자에서는 "편리하게 변한 자바의 interface"라고 생각하면 쉽게 활용할 수 있다.  struct는 클래스와 유사하게 함수를 정의하고 프로토콜을 상속받을 수 있다.  
+
+- 일반 :  protocol 이름{}
+- 인터페이스처럼 비어있는 값과 형을 정의
+- 상속 : 클래스나 struct에서 protocol을 상속받을 수 있다. 이때는 interface 처럼 선언된 변수나 함수를 반드시 구현해야 한다
+- 상속을 하지 않고 extension 스트럭쳐이름{ 프로토콜 구현 } 을 통해 프로토콜의 내용을 미리 구현해놓을 수 있다. java의 adapter class와 사용목적이 유사하다
+
+~~~swift
+// protocol, structure, extension
+
+// 복잡한 개념으로 protocol을 접근하지 말고 
+// java의 Interface가 더 유연해진 기능
+// 으로 생각하면 사용하기 편하다.
+protocol Animal{
+    var name : String {get set}
+    func cry ()
+}
+
+// struct는 class처럼 
+// 프로토콜 상속과 함께 함수도 가질 수 있다. 
+// protocol을 상속 시, 변수와 함수도 구현해야 한다. 
+struct Dog : Animal {
+    var name : String
+    func cry(){
+        print ("Kahhh~ krrr")
+    }
+}
+
+var animal  : Animal = Dog(name : "puppy")
+animal.cry()
+
+// 다중프로토콜도 상속가능
+// 클래스도 상속과 다중 프로토콜 상속을 
+// 동시에 사용할 수 있다.
+class Human{
+    
+}
+
+protocol Worker{
+    func working()
+}
+
+class Alba : Human, Animal, Worker{
+    var name : String = " " 
+    func cry(){
+        print ("more money~!")
+    }
+    
+    func working(){
+        print ("@!#@!!!~ ")
+    }
+}
+
+var ab = Alba()
+ab.cry()
+ab.working()
+
+// 최근 코딩스타일은 
+// 상속받지 않고 extension으로 
+// 기본값을 구현하는 방법을 사용함  
+protocol math{
+    func add ( a : Int, b : Int) -> Int
+    func sub ( a : Int, b : Int) -> Int
+}
+
+extension math{
+    func add ( a : Int, b : Int) -> Int{
+        return a + b 
+    }
+    func sub ( a : Int, b : Int) -> Int{
+        return a - b 
+    }
+}
+
+//  add, sub을 구현 안했음.
+struct newMath : math{
+}
+
+var mt    = newMath()
+var rst   = mt.add (a : 1 , b : 2)
+var rst2  = mt.add (a : 1 , b : 2)
+
+print ("rst -> \(rst) rst2 -> \(rst2)" )
+
+~~~
 
