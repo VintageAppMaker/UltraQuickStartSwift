@@ -490,7 +490,7 @@ print ("\(e.age)")
 - 일반 :  protocol 이름{}
 - 인터페이스처럼 비어있는 값과 형을 정의
 - 상속 : 클래스나 struct에서 protocol을 상속받을 수 있다. 이때는 interface 처럼 선언된 변수나 함수를 반드시 구현해야 한다
-- 상속을 하지 않고 extension 스트럭쳐이름{ 프로토콜 구현 } 을 통해 프로토콜의 내용을 미리 구현해놓을 수 있다. java의 adapter class와 사용목적이 유사하다
+- 상속을 하지 않고 extension 스트럭쳐이름{ 프로토콜 구현 } 을 통해 프로토콜의 내용을 미리 구현해놓을 수 있다. java의 adapter class와 사용목적이 유사하다. 이미 정의된 클래스(또는 스트럭쳐)에 추가로 함수를 정의할 때 사용한다. 
 
 ~~~swift
 // protocol, structure, extension
