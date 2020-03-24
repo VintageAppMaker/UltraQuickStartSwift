@@ -165,9 +165,9 @@ print (dic2)
 print (dic2[1]!)
 ~~~
 
-##### 9. 조건문(if, switch)    
+##### 9. 조건문(if, switch)  - 기본    
 
->    대부분의 언어와 유사한 구조이다. 그러나 조건영역인 ()를 삭제할 수 있다.
+>    swift의 조건문은 상당히 특이하고 많은 기능을 제공한다. 일반적으로 조건영역인 ()를 삭제할 수 있다. 복잡한 조건문은 나중에 다루기로 한다.
 
 - if 이후 조건영역인 ()를 삭제가능
 - &&의 경우 ,로 대치할 수 있다 
@@ -626,4 +626,35 @@ if case .suspend(let time, let message) = st2{
     print ("time is \(time) message is \(message)")
 }
 
+~~~
+
+##### 16. 복잡한 if 문 (조건리스트)     
+
+>    swift만의 독특한 조건리스트를  정리한다.  일종의 패턴을 비교하는 문법이다.  
+
+- 조건리스트는 하나 이상의 [조건패턴]이 , 로 연결된 것을 말한다
+- 일반조건식과 조건리스트를 , 로 연결하여 사용할 수 있다
+- (옵셔널) 바인딩 패턴, case 조건 패턴이 대표적이다
+
+~~~swift
+// 1. 옵셔널 바인딩
+var name : String?
+name = "snoop dog"
+
+// nil이 아니면
+if let rapper = name {
+    print(rapper)
+}
+
+// 2. if case 패턴매칭  
+let geo = (0, 234.0000)
+if case (_, 234.0000) = geo{
+    print("geo *, 234.0000")
+}
+
+// 3. 타입채크 
+var n: Any = 1
+if case is Int = n {
+    print("Integer")
+}
 ~~~
