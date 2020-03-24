@@ -571,3 +571,59 @@ print ("rst -> \(rst) rst2 -> \(rst2)" )
 
 ~~~
 
+##### 15. 열거형(enum)     
+
+>    swift의 열거형은 다른 언어에 유연한 편이다. 그러므로  수 많은 기능을 가지고 있다.   
+
+- 선언 :  enum 이름 : 형 { case 이름,  이름, ... } 
+- 형을 생략할 수도 있다. case 값 값 형태를 case 이름 [리턴] 형태로 사용하기도 한다.
+- 이름에 값을 대입(=)할 수 있다
+- enum 외부에서 rawValue로 값을 읽을 수 있다 
+- struct처럼 함수(메소드)를 정의할 수 있다.
+- 연관값을 가질 수 있다. enum의 이름을 함수처럼 이용할 수 있다
+- 연관값을 정의할 경우, enum 정의 시에는 (데이터형, ..) 형식으로 선언한다
+- 연관값을 대입 및 비교할 경우,  (let 변수명, ...) 형식으로 사용한다
+
+~~~swift
+// 형을 지정하는 경우
+enum Rank : Int {
+    case one, two, three = 1000
+}
+
+print (Rank.one)
+print (Rank.one.rawValue)
+print (Rank.three)
+print (Rank.three.rawValue)
+
+
+// 함수를 정의하는 경우 
+enum Food{
+    case bread
+    case apple
+    
+    func showDesc () -> String{
+        switch self{
+            case .bread:  return  "빵"
+            case .apple:  return  "사과"
+        }
+    }
+}
+
+print (Food.bread)
+var fd : Food = .bread
+print (fd.showDesc() )
+
+// 연관값을 가지는 경우 
+enum Status{
+    case run
+    case suspend(Int, String)
+}
+
+var st  : Status = .run
+var st2 : Status = .suspend(100, "힘들어서 잠시 멈춥니다")
+
+if case .suspend(let time, let message) = st2{
+    print ("time is \(time) message is \(message)")
+}
+
+~~~
