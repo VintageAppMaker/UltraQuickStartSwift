@@ -79,11 +79,17 @@ stringValue = 100
 - """ """ :  줄넘김이 있는 긴 문자열을 변수에 대입
 
 ~~~swift
-var stringValue = ""
-// type(of : 변수)는 타입채크 함수임  
-print (type(of : stringValue ) )
-// 아래는 에러임 
-stringValue = 100
+var stringValue = """
+1
+2
+3
+4
+5
+"""
+print (stringValue)
+
+let name = "arucard"
+print ("player name is \(name)")
 ~~~
 
 ##### 6. 숫자 <--> 문자형 변환  
@@ -142,6 +148,8 @@ var arr4 : [Int] = Array()
 var arr5 = [1, 2, 3, 4, 5]
 var arr6 = Array(1...5)
 
+arr6.append(2)
+var sum = arr5[1] + arr5[3] 
 print (arr5)
 print (arr6)
 ~~~
@@ -656,5 +664,70 @@ if case (_, 234.0000) = geo{
 var n: Any = 1
 if case is Int = n {
     print("Integer")
+}
+~~~
+
+##### 17. 예외처리      
+
+>    다른 언어와 비교해 사용법과 문법이 익숙한 구조가 아니다. 상당히 번거롭다.
+
+~~~
+// 일반적인 구조
+do {
+    try throwing 함수
+} catch <#pattern#> {
+    <#statements#>
+}
+
+// 한줄구조 리턴값이 옵셔널(리턴값이 있을 경우, 옵셔널 처리를 해주어야 한다)
+try ? 
+
+// 한줄구조 에러발생시 종료 
+try !
+~~~
+
+- Error를 상속받아 에러형을 정의해야 한다.
+- 에러발생이 예상되는 부분을 **guard let 변수 = 실행 { 에러발생시 코드 }**로 처리한다 
+- 에러를 발생하는 함수는 throws로 정의한다
+- do try .. catch 문에서 **try는 한 줄로 throws로 정의된 함수**를 사용한다 
+
+~~~swift
+
+var book = [ 1 : "one", 2 : "two" ]
+
+//1. Error 프로토콜을 재정의한다
+enum MyError : Error{
+    case unknown
+}
+
+//2. 함수를 throws로 정의한다.
+//에러발생하는 code를 guard let 변수 = 실행 { 에러발생시 코드}
+func errFunc() throws -> String{
+    guard let word = book[0] else {
+        throw MyError.unknown
+    }
+    
+    return word
+}
+
+//3.try catch로 처리
+do {
+    try errFunc()
+
+} catch {
+    print("\(error)")
+}
+
+//4. try?로 처리
+func errFunc2() throws -> String{
+    guard let word = book[1] else {
+        throw MyError.unknown
+    }
+    
+    return word
+}
+
+if let word = try? errFunc2(){
+    print (word)
 }
 ~~~
