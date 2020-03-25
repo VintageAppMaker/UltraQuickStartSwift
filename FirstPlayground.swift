@@ -4,7 +4,7 @@ import UIKit
 import PlaygroundSupport
 
 // 아무것도 모르는 상태에서 swift만 기초학습 후,
-// UI 구조 경험해보기(UIScrollView보다 TableView가 일반적임.
+// UI 구조 경험해보기(UIScrollView보다 TableView가 일반적임)
 class MyViewController : UIViewController {
     var str : String = ""
     func print (_ s : String){
