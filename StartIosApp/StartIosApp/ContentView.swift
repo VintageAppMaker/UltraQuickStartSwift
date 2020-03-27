@@ -100,6 +100,7 @@ struct ContentView: View {
     }
     
     // 버튼 2 Handler (swiftUI Alert 아님)
+    // 아래부분은 swiftUI preview에서는 에러발생함(주석처리하면 미리볼수 있음). 
     func onShowpopup (){
         NotificationCenter.default.post(name: Notification.Name("showAlert"), object: "button의 alert 메소드를 사용하는 것이 정석임\nUIKit과 호환을 위해 만든코드.\nSceneDelegate.swift에 기능추가함")
     }
