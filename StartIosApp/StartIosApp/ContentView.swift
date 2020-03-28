@@ -39,7 +39,7 @@ struct ContentView: View {
         // 3. LongPressGesture
         // @State로 선언된 변수는
         // $로 넘겨지고
-        // 받아처리하는 쪽에서는 연겨로디는
+        // 받아처리하는 쪽에서는 연결되는
         // 변수를 @binding으로 선언한다.
         // 그러면 값이 변경되면 서로 영향을 주게 된다.
         let longPress = LongPressGesture()
