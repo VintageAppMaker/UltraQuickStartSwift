@@ -19,6 +19,7 @@ print ("메인함수없이 코드순서대로 실행됩니다")
 
 - var : 읽기/쓰기 가능한 변수 
 - let : 읽기만 가능한 변수(상수개념)
+- {} 과정을 통한 초기값 지정 가능함
 
 ~~~swift
 let fixed_value    = 1000
@@ -29,6 +30,14 @@ editable_value = "changed"
 
 var 🐈 = "cat"
 print (🐈)
+
+// {} 과정을 통한 초기값 지정
+var sum : Int {
+    30 / 2
+}
+
+print ("\(sum)")
+
 ~~~
 
 ##### 3. 타입정의
