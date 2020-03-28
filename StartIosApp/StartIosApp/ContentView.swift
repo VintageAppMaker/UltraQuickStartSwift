@@ -37,8 +37,11 @@ struct ContentView: View {
     var body: some View {
         
         // 3. LongPressGesture
-        // @State로 선언된 변수를
-        // 바인딩(값변경 -> 화면전환)하고자 한다면 $변수 사용해야 함.
+        // @State로 선언된 변수는
+        // $로 넘겨지고
+        // 받아처리하는 쪽에서는 연겨로디는
+        // 변수를 @binding으로 선언한다.
+        // 그러면 값이 변경되면 서로 영향을 주게 된다.
         let longPress = LongPressGesture()
             .updating($isLongPressed) { value, state, transcation in
                 state = value
@@ -51,46 +54,58 @@ struct ContentView: View {
         // command + click 하면 좀 더 직관적으로
         // 사용가능하다.
         
-        // VStack은 Android의 버티컬 속성을 가진 LinearLayout과 같은
-        // 기능을 한다.
-        return VStack(alignment: .leading) {
-            // 텍스트
-            Text("\(title)")
-                .font(.title)
-                .bold()
-                .padding(.all, 4.0)
+        // NavigationView는 화면이동을 위해사용함
+        return NavigationView{
             
-            // 버튼 1.
-            // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
-            // action은 눌렀을 경우, 실행되는 콜백함수이다.
-            Button(action: {self.onIncrease()} ) {
-                makeButtonText(s : "Click me +1", c: Color.red)
-            }.padding(.all, 4.0)
+            // VStack은 Android의 버티컬 속성을 가진 LinearLayout과 같은
+            // 기능을 한다.
+            VStack(alignment: .leading) {
+                // 텍스트
+                Text("\(title)")
+                    .font(.title)
+                    .bold()
+                    .padding(.all, 4.0)
                 
-            // 길게 누르기 이벤트를 처리하는 텍스트
-            // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
-            // gesture에는 이벤트핸들러를 지정
-            Text("I'm Text. plz longpress ... ")
-                .padding(.all, 4.0)
-                .font(.subheadline)
-                .scaleEffect(isLongPressed ? 2.1 : 1)
-                .gesture(longPress)
+                // 버튼 1.
+                // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
+                // action은 눌렀을 경우, 실행되는 콜백함수이다.
+                Button(action: {self.onIncrease()} ) {
+                    makeButtonText(s : "Click me +1", c: Color.red)
+                }.padding(.all, 4.0)
+                    
+                // 길게 누르기 이벤트를 처리하는 텍스트
+                // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
+                // gesture에는 이벤트핸들러를 지정
+                Text("I'm Text. plz longpress ... ")
+                    .padding(.all, 4.0)
+                    .font(.subheadline)
+                    .scaleEffect(isLongPressed ? 2.1 : 1)
+                    .gesture(longPress)
+                
+                // 버튼 2.
+                Button(action: {self.onShowpopup()} ) {
+                    makeButtonText(s : "Click me, UIAlertController()", c: Color.blue)
+                }.padding(.all, 4.0)
+                
+                // 버튼 3.
+                Button(action: { self.isAlert = true} ) {
+                    makeButtonText(s : "Click me, SwiftUI Alert", c: Color.gray)
+                }.alert(isPresented: $isAlert) {
+                    Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
+                }.padding(.all, 4.0)
+                
+                // NavigationLink는 Simulator에서 버그가 있다.
+                // 이동이 한 번만 되는 경우가 발생한다. 
+                NavigationLink(destination: Example1View()) {
+                    Text("화면이동")
+                }.padding(.all, 4.0)
+            }
+            // 전체크기로 조정
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+            .background(Color.green)
+            .navigationBarTitle("Quick start SwiftUI")
             
-            // 버튼 2.
-            Button(action: {self.onShowpopup()} ) {
-                makeButtonText(s : "Click me, UIAlertController()", c: Color.blue)
-            }.padding(.all, 4.0)
-            
-            // 버튼 3.
-            Button(action: { self.isAlert = true} ) {
-                makeButtonText(s : "Click me, SwiftUI Alert", c: Color.gray)
-            }.alert(isPresented: $isAlert) {
-                Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
-            }.padding(.all, 4.0)
         }
-        // 전체크기로 조정
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-        .background(Color.green)
     }
     
     // 버튼1 Handler
@@ -102,7 +117,7 @@ struct ContentView: View {
     // 버튼 2 Handler (swiftUI Alert 아님)
     // 아래부분은 swiftUI preview에서는 에러발생함(주석처리하면 미리볼수 있음). 
     func onShowpopup (){
-        NotificationCenter.default.post(name: Notification.Name("showAlert"), object: "button의 alert 메소드를 사용하는 것이 정석임\nUIKit과 호환을 위해 만든코드.\nSceneDelegate.swift에 기능추가함")
+//        NotificationCenter.default.post(name: Notification.Name("showAlert"), object: "button의 alert 메소드를 사용하는 것이 정석임\nUIKit과 호환을 위해 만든코드.\nSceneDelegate.swift에 기능추가함")
     }
 }
 
