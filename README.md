@@ -325,6 +325,21 @@ func test4(num : Int ){
 
 test4(num : 100)
 
+// 파라메터 변수명 앞에 레이블이 다르면 
+// 같은 이름에 다른 함수를 사용가능하다  
+func test (op1 a : Int, op2 b : Int) -> Int{
+    return a + b
+}
+
+func test (o1 a : Int, o2 b : Int) -> Int{
+    return a - b
+}
+
+let rst  = test (op1 : 10 , op2 : 10)
+print("\(rst)")
+let rst2 = test (o1 : 10 , o2 : 10)
+print("\(rst2)")
+
 ~~~
 
 ##### 11. 클로져(closure)    
