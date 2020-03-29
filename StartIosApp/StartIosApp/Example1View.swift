@@ -27,14 +27,11 @@ struct Example1View: View {
     
     @ObservedObject var model : Model = Model()
     
-    
     // 초기화
     init(){
         for i in 0...3{
            self.model.lst.append("\(i)")
         }
-        
-        
     }
     
     var body: some View {
@@ -94,13 +91,12 @@ struct Example1View: View {
             }
         }.onAppear(){
             
-            // @State로 선언된 변수를 외부 모듈과 바인딩 
+            // @State로 선언된 변수를 외부 모듈과 바인딩
             ChangeStateValue(name : self.$message).modifyed(s : "loading 완료")
             
             // List를 직접 동적처리할 경우, 에러 발생함.
             // 시뮬레이터 버그인지 코드가 잘못된 것인지 판단못함
             // self.model.lst2.append("A")
-            
         }
     }
 }
@@ -113,6 +109,7 @@ struct ChangeStateValue {
         name = s
     }
 }
+
 // MVVM 구조의 Model
 class Model : ObservableObject{
     @Published var lst = [String]()
