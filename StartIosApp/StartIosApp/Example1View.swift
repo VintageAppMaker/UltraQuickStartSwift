@@ -20,18 +20,21 @@ struct Example1View: View {
     }
     
     let lst  : [item]   = [item( title : "A"), item( title : "B"), item( title : "C")]
-    let lst3 : [item2]  = [item2( title : "Identifiable2"), item2( title : "Identifiable3")]
+    let lst2 : [item2]  = [item2( title : "Identifiable2"), item2( title : "Identifiable3")]
     
     @State var users   = [String]()
     @State var message = ""
     
     @ObservedObject var model : Model = Model()
     
+    
     // 초기화
     init(){
         for i in 0...3{
-           self.model.lst2.append("\(i)")
+           self.model.lst.append("\(i)")
         }
+        
+        
     }
     
     var body: some View {
@@ -41,8 +44,8 @@ struct Example1View: View {
             Text(message)
             
             // List 또는 ForEach에서 배열값을 전달해야 할 경우...
-            // 방법 1) id :.\self는 유니크값이 없어도 되는 경우이다. 모든 배열이 가능하다.
-            // 방법 2) id :.\특정필드는 유니크값을 지정하는 경우이다. struct를 정의하고 id를 정의해야한다.
+            // 방법 1) 배열과 id 전달: id 값의 .\self는 unique id 값을 기본값으로 하는 경우이다.
+            // 방법 2) 배열과 id 전달: id 값의 .\특정필드는 유니크값을 지정하는 경우이다. struct를 정의하고 id를 정의해야한다.
             //     item을 구분하기 위한 특정필드를 약속하는 것이다. 값이 중복되도 에러는 안난다.
             // 방법 3) Identifiable을 상속받은 struct를 이용한다.
             List(lst, id: \.title){ nItem in
@@ -50,25 +53,38 @@ struct Example1View: View {
                 .bold()
             }
             
-            List(model.lst2, id: \.self){ str in
+            List(model.lst, id: \.self){ str in
                 Text("\(str)")
                 .bold()
             }
 
-            
-            List(lst3){ nItem in
+            Button("Clear All") {
+                self.model.lst.removeAll()
+            }
+
+            Button("Add more") {
+                for i in 0...10 {
+                    self.model.lst.append ("dummy - \(i)")
+                }
+            }
+        
+            List(lst2){ nItem in
                 Text("\(nItem.title)")
                 .bold()
             }
             
-            Button("Dynamic Add") {
-                self.users.append("Dynamic Add - " + String (self.users.count))
-            }
-            
-            Button("Dynamic remove 0") {
-                if self.users.count > 0 {
-                    self.users.remove(at: 0)
-                }
+            HStack{
+                Button("Add") {
+                    self.users.append("Dynamic Add - " + String (self.users.count))
+                }.padding(.all, 4.0)
+                .background(Color.green)
+                
+                Button("remove 0") {
+                    if self.users.count > 0 {
+                        self.users.remove(at: 0)
+                    }
+                }.padding(.all, 4.0)
+                .background(Color.green)
             }
             
             List {
@@ -77,7 +93,9 @@ struct Example1View: View {
                 }
             }
         }.onAppear(){
-            self.message = "loading 완료"
+            
+            // @State로 선언된 변수를 외부 모듈과 바인딩 
+            ChangeStateValue(name : self.$message).modifyed(s : "loading 완료")
             
             // List를 직접 동적처리할 경우, 에러 발생함.
             // 시뮬레이터 버그인지 코드가 잘못된 것인지 판단못함
@@ -86,9 +104,18 @@ struct Example1View: View {
         }
     }
 }
+
+// State 변수를 외부모듈에서 바인딩
+struct ChangeStateValue {
+    @Binding var name : String
+    
+    func modifyed ( s : String){
+        name = s
+    }
+}
 // MVVM 구조의 Model
 class Model : ObservableObject{
-    @Published var lst2 = [String]()
+    @Published var lst = [String]()
 }
 
 struct Example1_Previews: PreviewProvider {

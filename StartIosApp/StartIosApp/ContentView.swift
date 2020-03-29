@@ -25,7 +25,7 @@ struct ContentView: View {
     // swift 5.1부터 적용된 어노테이션 @State
     // View에서,
     // 값변경시 바로 화면에 적용해야 할 때 필수임.
-    // View 밖에서는 사용못함(private과 유사)
+    // 선언된 범위에서만 사용가능. 외부에서 사용못함(private과 유사)
     @State var title: String = "Swift Example"
     @State var count : Int = 0
     @GestureState var isLongPressed = false
@@ -38,7 +38,7 @@ struct ContentView: View {
     var body: some View {
         
         // 3. LongPressGesture
-        // @State로 선언된 변수는
+        // @State로 선언된 변수를 "외부에서 변경"하고자 한다면 
         // $로 넘겨지고
         // 받아처리하는 쪽에서는 연결되는
         // 변수를 @binding으로 선언한다.
