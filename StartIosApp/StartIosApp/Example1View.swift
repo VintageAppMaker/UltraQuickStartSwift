@@ -73,12 +73,7 @@ struct Example1View: View {
             self.message = "loading 완료"
         }
     }
-    
-    func delete(at offsets: IndexSet) {
-        if let first = offsets.first {
-            users.remove(at: first)
-        }
-    }
+
 }
 
 struct Example1_Previews: PreviewProvider {
