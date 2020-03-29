@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 /*
    #1 목적: 선학습없이 검색하며 찾아보는 SwiftUI
    

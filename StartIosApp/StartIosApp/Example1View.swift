@@ -5,8 +5,8 @@
 //  Created by adsloader on 2020/03/28.
 //  Copyright © 2020 adsloader. All rights reserved.
 //
-
 import SwiftUI
+import Combine
 
 struct Example1View: View {
     struct item{
@@ -20,10 +20,19 @@ struct Example1View: View {
     }
     
     let lst  : [item]   = [item( title : "A"), item( title : "B"), item( title : "C")]
-    let lst2 =  ["A", "B", "C"]
     let lst3 : [item2]  = [item2( title : "Identifiable2"), item2( title : "Identifiable3")]
+    
     @State var users   = [String]()
     @State var message = ""
+    
+    @ObservedObject var model : Model = Model()
+    
+    // 초기화
+    init(){
+        for i in 0...3{
+           self.model.lst2.append("\(i)")
+        }
+    }
     
     var body: some View {
         
@@ -31,9 +40,9 @@ struct Example1View: View {
             
             Text(message)
             
-            // List 또는 ForEach에서는 2번째 파라메터로 Uniq한 값을 전달해주어야 한다.
+            // List 또는 ForEach에서 배열값을 전달해야 할 경우...
             // 방법 1) id :.\self는 유니크값이 없어도 되는 경우이다. 모든 배열이 가능하다.
-            // 방법 2) id :.\특정필드는 유니크값을 지정하는 경우이다. struct를 정의하고 id 값을 var id = UUID()로 정의해야한다.
+            // 방법 2) id :.\특정필드는 유니크값을 지정하는 경우이다. struct를 정의하고 id를 정의해야한다.
             //     item을 구분하기 위한 특정필드를 약속하는 것이다. 값이 중복되도 에러는 안난다.
             // 방법 3) Identifiable을 상속받은 struct를 이용한다.
             List(lst, id: \.title){ nItem in
@@ -41,7 +50,7 @@ struct Example1View: View {
                 .bold()
             }
             
-            List(lst2, id: \.self){ str in
+            List(model.lst2, id: \.self){ str in
                 Text("\(str)")
                 .bold()
             }
@@ -68,12 +77,18 @@ struct Example1View: View {
                 }
             }
         }.onAppear(){
-            // list를 동적처리할 경우, 에러가 발생함.
-            // swift는 방법이 다른 언어와 다를것임
             self.message = "loading 완료"
+            
+            // List를 직접 동적처리할 경우, 에러 발생함.
+            // 시뮬레이터 버그인지 코드가 잘못된 것인지 판단못함
+            // self.model.lst2.append("A")
+            
         }
     }
-
+}
+// MVVM 구조의 Model
+class Model : ObservableObject{
+    @Published var lst2 = [String]()
 }
 
 struct Example1_Previews: PreviewProvider {
