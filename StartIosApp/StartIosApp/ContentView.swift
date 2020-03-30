@@ -26,7 +26,7 @@ struct ContentView: View {
     // View에서,
     // 값변경시 바로 화면에 적용해야 할 때 필수임.
     // 선언된 범위에서만 사용가능. 외부에서 사용못함(private과 유사)
-    @State var title: String = "Swift Example"
+    @State var title: String = "클릭 수: "
     @State var count : Int = 0
     @GestureState var isLongPressed = false
     
@@ -71,13 +71,13 @@ struct ContentView: View {
                 // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
                 // action은 눌렀을 경우, 실행되는 콜백함수이다.
                 Button(action: {self.onIncrease()} ) {
-                    makeButtonText(s : "Click me +1", c: Color.red)
+                    makeButtonText(s : "클릭하면 +1", c: Color.red)
                 }.padding(.all, 4.0)
                     
                 // 길게 누르기 이벤트를 처리하는 텍스트
                 // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
                 // gesture에는 이벤트핸들러를 지정
-                Text("I'm Text. plz longpress ... ")
+                Text("길게 눌러봐주세요 ... ")
                     .padding(.all, 4.0)
                     .font(.subheadline)
                     .scaleEffect(isLongPressed ? 2.1 : 1)
@@ -85,21 +85,30 @@ struct ContentView: View {
                 
                 // 버튼 2.
                 Button(action: {self.onShowpopup()} ) {
-                    makeButtonText(s : "Click me, UIAlertController()", c: Color.blue)
+                    makeButtonText(s : "Click하면, UIAlertController()", c: Color.blue)
                 }.padding(.all, 4.0)
                 
                 // 버튼 3.
                 Button(action: { self.isAlert = true} ) {
-                    makeButtonText(s : "Click me, SwiftUI Alert", c: Color.gray)
+                    makeButtonText(s : "Click하면, SwiftUI Alert", c: Color.gray)
                 }.alert(isPresented: $isAlert) {
                     Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
                 }.padding(.all, 4.0)
                 
+                Spacer()
+                
                 // NavigationLink는 Simulator에서 버그가 있다.
-                // 이동이 한 번만 되는 경우가 발생한다. 
+                // 이동이 한 번만 되는 경우가 발생한다.
                 NavigationLink(destination: Example1View()) {
-                    Text("화면이동")
+                    Text("예제1. 화면이동 및 List예제")
                 }.padding(.all, 4.0)
+                
+                // NavigationLink는 Simulator에서 버그가 있다.
+                // 이동이 한 번만 되는 경우가 발생한다.
+                NavigationLink(destination: Example2View()) {
+                    Text("예제2. Text 입력, Text 기본꾸미기, Image 배경")
+                }.padding(.all, 4.0)
+                
             }
             // 전체크기로 조정
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
