@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC00F46124338C0200B66450 /* Example3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00F46024338C0200B66450 /* Example3View.swift */; };
+		BC00F4632433966A00B66450 /* Example4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00F4622433966A00B66450 /* Example4View.swift */; };
+		BC00F46524342DC900B66450 /* Example5View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00F46424342DC900B66450 /* Example5View.swift */; };
 		BC57B641242EFD7F00F849F3 /* Example1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57B640242EFD7F00F849F3 /* Example1View.swift */; };
 		BCC0CC962431EF23003B1CBB /* Example2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0CC952431EF23003B1CBB /* Example2View.swift */; };
 		BCCFC5592429683E00F7B83A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFC5582429683E00F7B83A /* AppDelegate.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC00F46024338C0200B66450 /* Example3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example3View.swift; sourceTree = "<group>"; };
+		BC00F4622433966A00B66450 /* Example4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example4View.swift; sourceTree = "<group>"; };
+		BC00F46424342DC900B66450 /* Example5View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example5View.swift; sourceTree = "<group>"; };
 		BC57B640242EFD7F00F849F3 /* Example1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1View.swift; sourceTree = "<group>"; };
 		BCC0CC952431EF23003B1CBB /* Example2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2View.swift; sourceTree = "<group>"; };
 		BCCFC5552429683E00F7B83A /* StartIosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartIosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +118,9 @@
 				BCCFC5602429684300F7B83A /* Preview Content */,
 				BC57B640242EFD7F00F849F3 /* Example1View.swift */,
 				BCC0CC952431EF23003B1CBB /* Example2View.swift */,
+				BC00F46024338C0200B66450 /* Example3View.swift */,
+				BC00F4622433966A00B66450 /* Example4View.swift */,
+				BC00F46424342DC900B66450 /* Example5View.swift */,
 			);
 			path = StartIosApp;
 			sourceTree = "<group>";
@@ -274,6 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCCFC5592429683E00F7B83A /* AppDelegate.swift in Sources */,
+				BC00F46524342DC900B66450 /* Example5View.swift in Sources */,
+				BC00F46124338C0200B66450 /* Example3View.swift in Sources */,
+				BC00F4632433966A00B66450 /* Example4View.swift in Sources */,
 				BCC0CC962431EF23003B1CBB /* Example2View.swift in Sources */,
 				BCCFC55B2429683E00F7B83A /* SceneDelegate.swift in Sources */,
 				BC57B641242EFD7F00F849F3 /* Example1View.swift in Sources */,

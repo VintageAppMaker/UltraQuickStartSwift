@@ -60,55 +60,80 @@ struct ContentView: View {
             
             // VStack은 Android의 버티컬 속성을 가진 LinearLayout과 같은
             // 기능을 한다.
+            // ** 매우중요**
+            // 복잡한 화면이 될 수록, 클로져의 복잡성 문제로 call parameter에러가 발생한다.
+            // 그럴 경우는 , View 단위로 {}를 분리해주면 해결된다.
             VStack(alignment: .leading) {
-                // 텍스트
-                Text("\(title)")
-                    .font(.title)
-                    .bold()
-                    .padding(.all, 4.0)
-                
-                // 버튼 1.
-                // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
-                // action은 눌렀을 경우, 실행되는 콜백함수이다.
-                Button(action: {self.onIncrease()} ) {
-                    makeButtonText(s : "클릭하면 +1", c: Color.red)
-                }.padding(.all, 4.0)
+            
+                // Spacing을 사용할 경우 버그발생
+                // VStack()으로 분리함.
+                VStack(alignment: .leading) {
+                    // 텍스트
+                    Text("\(title)")
+                        .font(.title)
+                        .bold()
+                        .padding(.all, 4.0)
                     
-                // 길게 누르기 이벤트를 처리하는 텍스트
-                // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
-                // gesture에는 이벤트핸들러를 지정
-                Text("길게 눌러봐주세요 ... ")
-                    .padding(.all, 4.0)
-                    .font(.subheadline)
-                    .scaleEffect(isLongPressed ? 2.1 : 1)
-                    .gesture(longPress)
+                    // 버튼 1.
+                    // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
+                    // action은 눌렀을 경우, 실행되는 콜백함수이다.
+                    Button(action: {self.onIncrease()} ) {
+                        makeButtonText(s : "클릭하면 +1", c: Color.red)
+                    }.padding(.all, 4.0)
+                    .background(Color.yellow)
+                    .cornerRadius(20)
+
+                    // 길게 누르기 이벤트를 처리하는 텍스트
+                    // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
+                    // gesture에는 이벤트핸들러를 지정
+                    Text("길게 눌러봐주세요 ... ")
+                        .padding(.all, 4.0)
+                        .font(.subheadline)
+                        .scaleEffect(isLongPressed ? 2.1 : 1)
+                        .gesture(longPress)
+                    
+                    // 버튼 2.
+                    Button(action: {self.onShowpopup()} ) {
+                        makeButtonText(s : "Click하면, UIAlertController()", c: Color.blue)
+                    }.padding(.all, 4.0)
+                    
+                    // 버튼 3.
+                    Button(action: { self.isAlert = true} ) {
+                        makeButtonText(s : "Click하면, SwiftUI Alert", c: Color.gray)
+                    }.alert(isPresented: $isAlert) {
+                        Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
+                    }.padding(.all, 4.0)
+                    
+                }
                 
-                // 버튼 2.
-                Button(action: {self.onShowpopup()} ) {
-                    makeButtonText(s : "Click하면, UIAlertController()", c: Color.blue)
-                }.padding(.all, 4.0)
+                // 위의 View를 분리해서 사용가능함
+                Spacer().frame(height: 280)
                 
-                // 버튼 3.
-                Button(action: { self.isAlert = true} ) {
-                    makeButtonText(s : "Click하면, SwiftUI Alert", c: Color.gray)
-                }.alert(isPresented: $isAlert) {
-                    Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
-                }.padding(.all, 4.0)
-                
-                Spacer()
-                
-                // NavigationLink는 Simulator에서 버그가 있다.
+                // 특정 SDK 버전에서 NavigationLink는 Simulator에서 버그가 있다.
                 // 이동이 한 번만 되는 경우가 발생한다.
-                NavigationLink(destination: Example1View()) {
-                    Text("예제1. 화면이동 및 List예제")
-                }.padding(.all, 4.0)
+                List{
+                    NavigationLink(destination: Example1View()) {
+                        Text("예제1. List")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example2View()) {
+                        Text("예제2. Text 입력, Text 기본꾸미기, Image 배경")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example3View()) {
+                        Text("예제3. ScrollView")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example4View()) {
+                        Text("예제4. NavigationView & List Edit")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example5View()) {
+                        Text("예제5. tab")
+                    }.padding(.all, 4.0)
+                }
                 
-                // NavigationLink는 Simulator에서 버그가 있다.
-                // 이동이 한 번만 되는 경우가 발생한다.
-                NavigationLink(destination: Example2View()) {
-                    Text("예제2. Text 입력, Text 기본꾸미기, Image 배경")
-                }.padding(.all, 4.0)
-                
+            
             }
             // 전체크기로 조정
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
@@ -117,6 +142,7 @@ struct ContentView: View {
             
         }
     }
+    
     
     // 버튼1 Handler
     func onIncrease (){
