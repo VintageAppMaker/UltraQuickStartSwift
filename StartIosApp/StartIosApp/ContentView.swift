@@ -61,11 +61,11 @@ struct ContentView: View {
             // VStack은 Android의 버티컬 속성을 가진 LinearLayout과 같은
             // 기능을 한다.
             // ** 매우중요**
-            // 복잡한 화면이 될 수록, 클로져의 복잡성 문제로 call parameter에러가 발생한다.
-            // 그럴 경우는 , View 단위로 {}를 분리해주면 해결된다.
+            // 복잡한 화면이 될 수록, 클로져의 복잡성 문제로 call parameter 에러가 발생한다.
+            // 그럴 경우, View 단위로 {}를 분리해주면 해결된다.
             VStack(alignment: .leading) {
             
-                // Spacing을 사용할 경우 버그발생
+                // Spacer()를 호출할 경우, 버그발생헀음.
                 // VStack()으로 분리함.
                 VStack(alignment: .leading) {
                     // 텍스트
@@ -106,7 +106,7 @@ struct ContentView: View {
                     
                 }
                 
-                // 위의 View를 분리해서 사용가능함
+                // 위의 View를 VStack으로 분리해서 사용가능함
                 Spacer().frame(height: 280)
                 
                 // 특정 SDK 버전에서 NavigationLink는 Simulator에서 버그가 있다.
