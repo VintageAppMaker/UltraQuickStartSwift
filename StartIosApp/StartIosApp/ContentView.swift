@@ -107,13 +107,13 @@ struct ContentView: View {
                 }
                 
                 // 위의 View를 VStack으로 분리해서 사용가능함
-                Spacer().frame(height: 280)
+                Spacer().frame(height: 240)
                 
                 // 특정 SDK 버전에서 NavigationLink는 Simulator에서 버그가 있다.
                 // 이동이 한 번만 되는 경우가 발생한다.
                 List{
                     NavigationLink(destination: Example1View()) {
-                        Text("예제1. List")
+                        Text("예제1. List 추가/삭제 데이터연결")
                     }.padding(.all, 4.0)
                     
                     NavigationLink(destination: Example2View()) {
@@ -131,6 +131,15 @@ struct ContentView: View {
                     NavigationLink(destination: Example5View()) {
                         Text("예제5. tab")
                     }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example6View()) {
+                        Text("예제6. GeometryReader - 비율")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example7View()) {
+                        Text("예제7. ZStack - 레이어겹치기(FraemeLayout)")
+                    }.padding(.all, 4.0)
+                    
                 }
                 
             
