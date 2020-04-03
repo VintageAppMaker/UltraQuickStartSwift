@@ -140,6 +140,10 @@ struct ContentView: View {
                         Text("예제7. ZStack - 레이어겹치기(FraemeLayout)")
                     }.padding(.all, 4.0)
                     
+                    NavigationLink(destination: Example8View()) {
+                        Text("예제8. Segment Control")
+                    }.padding(.all, 4.0)
+                    
                 }
                 
             
