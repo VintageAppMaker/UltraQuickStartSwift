@@ -144,6 +144,15 @@ struct ContentView: View {
                         Text("예제8. Segment Control")
                     }.padding(.all, 4.0)
                     
+                    NavigationLink(destination: Example9View(url: "http://vintageappmaker.com/wp-content/uploads/2015/03/cropped-logo.png")) {
+                        Text("예제9. ImageURL(opensource 참고)")
+                    }.padding(.all, 4.0)
+                    
+                    NavigationLink(destination: Example10View()) {
+                        Text("예제10. UIKit 사용(WebView)")
+                    }.padding(.all, 4.0)
+                    
+                    
                 }
                 
             
