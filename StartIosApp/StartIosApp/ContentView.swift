@@ -55,14 +55,41 @@ struct ContentView: View {
         // command + click 하면 좀 더 직관적으로
         // 사용가능하다.
         
-        // NavigationView는 화면이동을 위해사용함
+        // 또는 code에서 우클릭 후,
+        // show code action을 통해서도
+        // 편리한 기능을 사용할 수 있다.
+        
+        // (***) 메뉴처리
+        // View를 함수나 배열에서 사용하려면
+        // AnyView(뷰객체)로 사용해야 한다.
+        struct menuItem {
+            var ID    = UUID()
+            var title : String
+            var obj   : AnyView
+        }
+        
+        let mn : [menuItem] = [
+            menuItem ( title : "1. List 추가/삭제 데이터연결" , obj: AnyView(Example1View()) ),
+            menuItem ( title : "2. 필수화면 기초" , obj: AnyView(Example2View()) ),
+            menuItem ( title : "3. ScrollView" , obj: AnyView(Example3View()) ),
+            menuItem ( title : "4. NavigationView & List Edit" , obj: AnyView(Example4View()) ),
+            menuItem ( title : "5. tab" , obj: AnyView(Example5View()) ),
+            menuItem ( title : "6. GeometryReader - 비율" , obj: AnyView(Example6View()) ),
+            menuItem ( title : "7. ZStack - 레이어겹치기(FraemeLayout)" , obj: AnyView(Example7View()) ),
+            menuItem ( title : "8. Segment Control" , obj: AnyView(Example8View()) ),
+            menuItem ( title : "9. ImageURL(opensource 참고)" , obj: AnyView(Example9View(url: "http://vintageappmaker.com/wp-content/uploads/2015/03/cropped-logo.png")) ),
+            menuItem ( title : "10. UIKit 사용(WebView)" , obj: AnyView(Example10View()) ),
+            menuItem ( title : "11. SearchUI(stackoverflow)" , obj: AnyView(Example11View()) )
+        ]
+        
         return NavigationView{
             
             // VStack은 Android의 버티컬 속성을 가진 LinearLayout과 같은
             // 기능을 한다.
             // ** 매우중요**
-            // 복잡한 화면이 될 수록, 클로져의 복잡성 문제로 call parameter 에러가 발생한다.
-            // 그럴 경우, View 단위로 {}를 분리해주면 해결된다.
+            // ViewBuilder는 클로져의 복잡성 문제로 extra parameter call 에러가 발생한다.
+            // 10개 이상의 View를 추가할 경우 발생한다.
+            // 그럴 경우, View를 그룹단위(Group을 사용하거나 다른 View 안으로 그룹화)로 분리해야한다.
             VStack(alignment: .leading) {
             
                 // Spacer()를 호출할 경우, 버그발생헀음.
@@ -111,47 +138,12 @@ struct ContentView: View {
                 
                 // 특정 SDK 버전에서 NavigationLink는 Simulator에서 버그가 있다.
                 // 이동이 한 번만 되는 경우가 발생한다.
-                List{
-                    NavigationLink(destination: Example1View()) {
-                        Text("예제1. List 추가/삭제 데이터연결")
-                    }.padding(.all, 4.0)
+                List(mn, id : \.title){
+                    n in
                     
-                    NavigationLink(destination: Example2View()) {
-                        Text("예제2. Text 입력, Text 기본꾸미기, Image 배경")
+                    NavigationLink(destination: n.obj) {
+                        Text(n.title )
                     }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example3View()) {
-                        Text("예제3. ScrollView")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example4View()) {
-                        Text("예제4. NavigationView & List Edit")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example5View()) {
-                        Text("예제5. tab")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example6View()) {
-                        Text("예제6. GeometryReader - 비율")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example7View()) {
-                        Text("예제7. ZStack - 레이어겹치기(FraemeLayout)")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example8View()) {
-                        Text("예제8. Segment Control")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example9View(url: "http://vintageappmaker.com/wp-content/uploads/2015/03/cropped-logo.png")) {
-                        Text("예제9. ImageURL(opensource 참고)")
-                    }.padding(.all, 4.0)
-                    
-                    NavigationLink(destination: Example10View()) {
-                        Text("예제10. UIKit 사용(WebView)")
-                    }.padding(.all, 4.0)
-                    
                     
                 }
                 
