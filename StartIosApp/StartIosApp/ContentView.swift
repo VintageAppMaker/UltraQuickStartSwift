@@ -113,7 +113,7 @@ struct ContentView: View {
                     // 길게 누르기 이벤트를 처리하는 텍스트
                     // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
                     // gesture에는 이벤트핸들러를 지정
-                    Text("길게 눌러봐주세요 ... ")
+                    Text("👉🏿길게 눌러봐주세요 ... ")
                         .padding(.all, 4.0)
                         .font(.subheadline)
                         .scaleEffect(isLongPressed ? 2.1 : 1)
@@ -121,12 +121,12 @@ struct ContentView: View {
                     
                     // 버튼 2.
                     Button(action: {self.onShowpopup()} ) {
-                        makeButtonText(s : "Click하면, UIAlertController()", c: Color.blue)
+                        makeButtonText(s : "👉🏿Click하면, UIAlertController()", c: Color.blue)
                     }.padding(.all, 4.0)
                     
                     // 버튼 3.
                     Button(action: { self.isAlert = true} ) {
-                        makeButtonText(s : "Click하면, SwiftUI Alert", c: Color.gray)
+                        makeButtonText(s : "👉🏿Click하면, SwiftUI Alert", c: Color.gray)
                     }.alert(isPresented: $isAlert) {
                         Alert(title: Text("SwiftUI"), message: Text("변수를 바인딩해야함"), dismissButton: .default(Text("이해했습니다. 귀찮네요..")))
                     }.padding(.all, 4.0)
@@ -151,7 +151,7 @@ struct ContentView: View {
             }
             // 전체크기로 조정
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-            .background(Color.green)
+            .background(Color(red: 100 / 255, green: 242 / 255, blue: 142 / 255))
             .navigationBarTitle("Quick start SwiftUI")
             
         }
