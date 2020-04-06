@@ -29,8 +29,8 @@ struct Example1View: View {
     
     // 초기화
     init(){
-        for i in 0...3{
-           self.model.lst.append("\(i)")
+        for i in 0...13{
+           self.model.lst.append(i)
         }
     }
     
@@ -50,9 +50,20 @@ struct Example1View: View {
                 .bold()
             }
             
-            List(model.lst, id: \.self){ str in
-                Text("\(str)")
-                .bold()
+            List(model.lst, id: \.self){ n in
+                
+                // *** body를 구현하는 곳에서 조건문을 사용하고자 한다면 *** 
+                // Group안에서 가능하다.
+                Group{
+                    if n  < 5 {
+                        Text("\(n)위 = 합격")
+                        .bold()
+                    } else {
+                        Text("불합격")
+                            .foregroundColor(Color.red)
+                    }
+                }
+                
             }
 
             Button("Clear All") {
@@ -61,7 +72,7 @@ struct Example1View: View {
 
             Button("Add more") {
                 for i in 0...10 {
-                    self.model.lst.append ("dummy - \(i)")
+                    self.model.lst.append (i)
                 }
             }
         
@@ -112,7 +123,7 @@ struct ChangeStateValue {
 
 // MVVM 구조의 Model
 class Model : ObservableObject{
-    @Published var lst = [String]()
+    @Published var lst = [Int]()
 }
 
 struct Example1_Previews: PreviewProvider {
