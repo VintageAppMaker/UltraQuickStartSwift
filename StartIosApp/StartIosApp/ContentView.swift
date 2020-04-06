@@ -79,7 +79,8 @@ struct ContentView: View {
             menuItem ( title : "8. Segment Control" , obj: AnyView(Example8View()) ),
             menuItem ( title : "9. ImageURL(opensource 참고)" , obj: AnyView(Example9View(url: "http://vintageappmaker.com/wp-content/uploads/2015/03/cropped-logo.png")) ),
             menuItem ( title : "10. UIKit 사용(WebView)" , obj: AnyView(Example10View()) ),
-            menuItem ( title : "11. SearchUI(stackoverflow)" , obj: AnyView(Example11View()) )
+            menuItem ( title : "11. SearchUI(stackoverflow)" , obj: AnyView(Example11View()) ),
+            menuItem ( title : "12. Swipe(stackoverflow)" , obj: AnyView(Example12View()) )
         ]
         
         return NavigationView{
