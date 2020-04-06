@@ -104,10 +104,6 @@ struct Example1View: View {
             
             // @State로 선언된 변수를 외부 모듈과 바인딩
             ChangeStateValue(name : self.$message).modifyed(s : "loading 완료")
-            
-            // List를 직접 동적처리할 경우, 에러 발생함.
-            // 시뮬레이터 버그인지 코드가 잘못된 것인지 판단못함
-            // self.model.lst2.append("A")
         }
     }
 }
