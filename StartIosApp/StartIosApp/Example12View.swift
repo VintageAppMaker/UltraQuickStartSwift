@@ -11,8 +11,8 @@ import SwiftUI
 // 참고 blog: https://habr.com/en/post/476494/
 struct Example12View: View {
     var items: [menuItem] = [
-        menuItem(obj: AnyView(Example1View())),
-        menuItem(obj: AnyView(Example8View())),
+        menuItem(obj: AnyView(Example3View())),
+        menuItem(obj: AnyView(Example6View())),
         menuItem(obj: AnyView(Example4View()))
     ]
     
