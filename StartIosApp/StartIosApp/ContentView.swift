@@ -26,7 +26,7 @@ struct ContentView: View {
     // View에서,
     // 값변경시 바로 화면에 적용해야 할 때 필수임.
     // 선언된 범위에서만 사용가능. 외부에서 사용못함(private과 유사)
-    @State var title: String = "클릭 수: "
+    @State var title: String = "count: "
     @State var count : Int = 0
     @GestureState var isLongPressed = false
     
@@ -97,19 +97,23 @@ struct ContentView: View {
                 // VStack()으로 분리함.
                 VStack(alignment: .leading) {
                     // 텍스트
-                    Text("\(title)")
-                        .font(.title)
-                        .bold()
-                        .padding(.all, 4.0)
+                    HStack{
+                        // 버튼 1.
+                        // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
+                        // action은 눌렀을 경우, 실행되는 콜백함수이다.
+                        Button(action: {self.onIncrease()} ) {
+                            makeButtonText(s : " 증가 +1 ", c: Color.red)
+                        }.padding(.all, 8.0)
+                        .background(Color.yellow)
+                        .cornerRadius(20)
+                        
+                        Text("\(title)")
+                            .font(.title)
+                            .bold()
+                            .padding(.all, 4.0)
                     
-                    // 버튼 1.
-                    // Button 생성시 이름없는 {}는 Text를 리턴하는 초기화 함수이다. 실제이름은 label이다.
-                    // action은 눌렀을 경우, 실행되는 콜백함수이다.
-                    Button(action: {self.onIncrease()} ) {
-                        makeButtonText(s : "클릭하면 +1", c: Color.red)
-                    }.padding(.all, 4.0)
-                    .background(Color.yellow)
-                    .cornerRadius(20)
+                    }.padding(.all, 5.0)
+                    Spacer().frame(height: 20)
 
                     // 길게 누르기 이벤트를 처리하는 텍스트
                     // scaleEffect에서는 isLongPressed에 바인딩하여 값이 변경될 시, 확대축소
@@ -162,7 +166,7 @@ struct ContentView: View {
     // 버튼1 Handler
     func onIncrease (){
         count = count + 1
-        self.title = "Swift Example \(self.count)"
+        self.title = "count: \(self.count)"
     }
     
     // 버튼 2 Handler (swiftUI Alert 아님)
