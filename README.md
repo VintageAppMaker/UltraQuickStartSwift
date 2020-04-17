@@ -149,9 +149,9 @@ print (arr5)
 print (arr6)
 ~~~
 
-##### 9. 사전   
+##### 9. 사전, 튜플   
 
->    키 : 값 형태의 데이터형. 배열과 비슷하나 [키:값]으로 사용함
+> 사전은 키 : 값 형태의 데이터형. 배열과 비슷하나 [키:값]으로 사용함. 튜플은 배열과 유사하나 각 원소의 데이터형이 다를 수 있다. 주로 함수의 리턴값에 다양한 형태의 값을 넘길 떄 사용한다. 
 
 - 좌측변수가 형정의 안되어있을 경우,  값이 없다면 [키:값] ()로 대입
 - 좌측변수가 형정의 되어있을 경우,  값이 없다면 [:]로 대입
@@ -166,6 +166,21 @@ var d4 : Dictionary<Int, String> = Dictionary<Int, String>()
 var dic2 = [1:"one", 2:"two", 3:"three"]
 print (dic2)
 print (dic2[1]!)
+
+
+var t : (Int, Bool, String) = (12, true, "AAA")
+print (t)
+print (t.0)
+print (t.1)
+print (t.2)
+
+var (age, _ , message) = t
+print("\(age) \(message)")
+
+var t2 = (name : "name", age: 30)
+print (t2.name)
+print (t2.age)
+
 ~~~
 
 ##### 10. 조건문(if, switch)  - 기본    
