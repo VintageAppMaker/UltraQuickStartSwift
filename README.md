@@ -762,3 +762,64 @@ if let word = try? errFunc2(){
     print (word)
 }
 ~~~
+
+##### 20. 프로퍼티와 프로퍼티래퍼    
+
+>    struct/class 레벨에서 프로퍼티를 적용할 수 있다. 그리고 어노테이션 형태로 struct/class 레벨에서 범용적인 프로퍼티를 적용할 수 있다. 이를 프로퍼티 래퍼라고 한다.  
+
+- 실제저장되는 변수를 따로 지정한다. 
+- **var 프로퍼티명 : 데이터형 {get{} set(){}}**
+- 프로퍼티래퍼는 swift 5.X이상부터 지원 
+- @propertyWrapper로 정의
+- 이미 지정된 wrappedValue의 이름으로 프로퍼티 정의
+
+~~~swift
+struct MyWantAge{
+    var _age : Int = 0
+    var age : Int {
+        get {return _age}
+        set (n) {
+            if n >= 50 {
+                _age = 49
+            } else {
+                _age = n
+            }
+        }
+    }    
+}
+
+var me = MyWantAge()
+me.age = 50
+print (me.age)
+
+@propertyWrapper
+struct WomanMannerAge{
+    // 실제저장되는 곳 
+    private(set) var _age : Int = 0
+    
+    // 반드시 아래의 이름으로 프로퍼티 생성 
+    var wrappedValue : Int {
+        get {return _age}
+        set (n) {
+            if n >= 30 {
+                _age = n - 10
+            } else {
+                _age = n
+            }
+        }
+    }
+    init (wrappedValue initAge: Int){
+        self.wrappedValue = initAge 
+    }    
+}
+
+// 프로퍼티래퍼는  class/struct에서만 사용가능함
+struct OldLady{
+    @WomanMannerAge var age = 0
+}
+
+var woman1 = OldLady( age: 50 )
+print (woman1.age)
+
+~~~
+
