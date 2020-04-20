@@ -80,7 +80,8 @@ struct ContentView: View {
             menuItem ( title : "9. ImageURL(opensource 참고)" , obj: AnyView(Example9View(url: "http://vintageappmaker.com/wp-content/uploads/2015/03/cropped-logo.png")) ),
             menuItem ( title : "10. UIKit 사용(WebView)" , obj: AnyView(Example10View()) ),
             menuItem ( title : "11. SearchUI(stackoverflow 참고)" , obj: AnyView(Example11View()) ),
-            menuItem ( title : "12. Swipe(blog 참고)" , obj: AnyView(Example12View()) )
+            menuItem ( title : "12. Swipe(blog 참고)" , obj: AnyView(Example12View()) ),
+            menuItem ( title : "13. 메뉴, 뒤로가기, 웹브라우저 호출" , obj: AnyView(Example13View()) )
         ]
         
         return NavigationView{

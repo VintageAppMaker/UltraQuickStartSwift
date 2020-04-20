@@ -27,6 +27,7 @@
 		BCCFC5652429684300F7B83A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCCFC5632429684300F7B83A /* LaunchScreen.storyboard */; };
 		BCCFC5702429684400F7B83A /* StartIosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFC56F2429684400F7B83A /* StartIosAppTests.swift */; };
 		BCCFC57B2429684400F7B83A /* StartIosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCFC57A2429684400F7B83A /* StartIosAppUITests.swift */; };
+		BCD35E51244DC3C100D1990D /* Example13View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD35E50244DC3C100D1990D /* Example13View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		BCCFC5762429684400F7B83A /* StartIosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StartIosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCFC57A2429684400F7B83A /* StartIosAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartIosAppUITests.swift; sourceTree = "<group>"; };
 		BCCFC57C2429684400F7B83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCD35E50244DC3C100D1990D /* Example13View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example13View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				BC7FC1652438C57900A7D473 /* Example10View.swift */,
 				BC8623E624399A2500533CA6 /* Example11View.swift */,
 				BC65B3D4243A976C00AA03EB /* Example12View.swift */,
+				BCD35E50244DC3C100D1990D /* Example13View.swift */,
 			);
 			path = StartIosApp;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				BC00F46524342DC900B66450 /* Example5View.swift in Sources */,
 				BC00F46124338C0200B66450 /* Example3View.swift in Sources */,
 				BC00F4632433966A00B66450 /* Example4View.swift in Sources */,
+				BCD35E51244DC3C100D1990D /* Example13View.swift in Sources */,
 				BC7FC1662438C57900A7D473 /* Example10View.swift in Sources */,
 				BC4AA837243552EA002855BD /* Example6View.swift in Sources */,
 				BCC0CC962431EF23003B1CBB /* Example2View.swift in Sources */,
