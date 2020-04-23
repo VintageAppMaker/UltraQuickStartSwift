@@ -81,7 +81,8 @@ struct ContentView: View {
             menuItem ( title : "10. UIKit 사용(WebView)" , obj: AnyView(Example10View()) ),
             menuItem ( title : "11. SearchUI(stackoverflow 참고)" , obj: AnyView(Example11View()) ),
             menuItem ( title : "12. Swipe(blog 참고)" , obj: AnyView(Example12View()) ),
-            menuItem ( title : "13. 메뉴, 뒤로가기, 웹브라우저 호출" , obj: AnyView(Example13View()) )
+            menuItem ( title : "13. 메뉴, 뒤로가기, 웹브라우저 호출" , obj: AnyView(Example13View()) ),
+            menuItem ( title : "14. 커스텀 수정자, 동적 커스텀뷰" , obj: AnyView(Example14View()) )
         ]
         
         return NavigationView{
