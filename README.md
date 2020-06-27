@@ -723,7 +723,7 @@ try !
 ~~~
 
 - Error를 상속받아 에러형을 정의해야 한다.
-- 에러발생이 예상되는 부분을 **guard let 변수 = 실행 { 에러발생시 코드 }**로 처리한다 
+- 에러발생이 예상되는 부분을 **guard let 변수 = 값 [, 조건] else {  예외발생시 코드 }**로 처리한다 
 - 에러를 발생하는 함수는 throws로 정의한다
 - do try .. catch 문에서 **try는 한 줄로 throws로 정의된 함수**를 사용한다 
 
@@ -737,7 +737,7 @@ enum MyError : Error{
 }
 
 //2. 함수를 throws로 정의한다.
-//에러발생하는 code를 guard let 변수 = 실행 { 에러발생시 코드}
+//에러발생하는 code를 guard let 변수 = 값  [, 조건] else { 예외발생시 코드}
 func errFunc() throws -> String{
     guard let word = book[0] else {
         throw MyError.unknown
